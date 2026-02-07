@@ -1,0 +1,52 @@
+# Python stuff
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv
+env/
+venv/
+ENV/
+
+# Environment and Secrets
+.env
+.env.test
+
+# Logs
+*.log
+server.log
+
+# UI Samples & Inspiration (Irrelevant for deployment)
+ui-sample/
+
+# Test Suite & Debugging Scripts (Irrelevant for deployment)
+tests/
+debug_*.py
+test_*.py
+reproduce_*.py
+verify_*.py
+payload.json
+
+# Specific non-relevant files
+test_api.py
+test_api_detailed.py
+test_dependency_aware.py
+test_imports.py
+test_output_quality.py
+test_request.py
+test_scenario_parse.py
+verify_retrieval.py
+
+# Raw Data (Too large or sensitive, indices are enough for demo)
+data/raw/*
+!data/raw/.gitkeep
+
+# Project Specific
+# We include data/processed because indices (FAISS/BM25) are required for the app to function.
+# Without them, the app would require an ingestion step on a cold start.
+
+# System
+.DS_Store
+Thumbs.db

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COREP Reporting Assistant</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <h1><span class="logo-icon"></span>🏦</span> COREP Reporting Assistant</h1>
+            </div>
+            <div class="status-bar">
+                <span id="status-text">Ready</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Left Side: Inputs -->
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="template-select">Target Template</label>
+                    <select id="template-select">
+                        <option value="C01.00">C 01.00 - Own Funds</option>
+                        <option value="C07.00">C 07.00 - Credit Risk SA</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="as-of-date">As Of Date</label>
+                    <input type="date" id="as-of-date">
+                </div>
+
+                <div class="input-group">
+                    <label for="scenario">Scenario / Context</label>
+                    <textarea id="scenario"
+                        placeholder="Describe the bank's situation, capital figures, or exposure details here..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="question">Reporting Question</label>
+                    <textarea id="question"
+                        placeholder="E.g., What is the total CET1 capital? or How should I report this exposure?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <button id="submit-btn" class="btn btn-primary">🚀 Submit Question</button>
+                    <button id="ingest-btn" class="btn btn-secondary">🔄 Re-Ingest Documents</button>
+                </div>
+
+                <!-- Advanced Settings Toggle -->
+                <div class="advanced-settings">
+                    <div class="settings-toggle"
+                        onclick="document.querySelector('.settings-content').classList.toggle('visible')">
+                        <span>⚙️ Advanced Settings</span>
+                    </div>
+
+                    <div class="settings-content">
+                        <div class="input-group">
+                            <label for="top-k">Retrieval Chunks (Top-K)</label>
+                            <input type="number" id="top-k" value="6" min="1" max="20">
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="use-bm25" checked>
+                            <label for="use-bm25">Use Keyword Search (BM25)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="use-faiss" checked>
+                            <label for="use-faiss">Use Semantic Search (FAISS)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="citation-strict" checked>
+                            <label for="citation-strict">Strict Citations</label>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="confidence-threshold">Confidence Threshold (0.0 - 1.0)</label>
+                            <input type="number" id="confidence-threshold" value="0.65" step="0.05" min="0" max="1">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Results -->
+            <section id="results-section" class="results-section hidden">
+
+                <!-- Answer Panel -->
+                <div id="answer-panel" class="answer-panel">
+                    <h3>💡 Answer</h3>
+                    <div id="final-answer-text" class="markdown-body"></div>
+                    <div id="answer-citations" class="citations-list"></div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="evidence">📄 Evidence</button>
+                    <button class="tab-btn" data-tab="json">Assessmet JSON</button>
+                    <button class="tab-btn" data-tab="template">📊 Template Extract</button>
+                    <button class="tab-btn" data-tab="validation">✅ Validation</button>
+                </div>
+
+                <div id="evidence-tab" class="tab-content active">
+                    <div id="evidence-output"></div>
+                </div>
+
+                <div id="json-tab" class="tab-content">
+                    <pre id="json-output"></pre>
+                </div>
+
+                <div id="template-tab" class="tab-content">
+                    <div id="template-output"></div>
+                </div>
+
+                <div id="validation-tab" class="tab-content">
+                    <div id="validation-output"></div>
+                </div>
+
+
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
