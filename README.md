@@ -147,6 +147,23 @@ python app.py
 
 The application will be available at: **http://127.0.0.1:8000**
 
+## ☁️ Deployment (Vercel)
+
+This project is configured for easy deployment on **Vercel** using the `@vercel/python` builder.
+
+### 1. Import to Vercel
+Connect your GitHub repository to Vercel.
+
+### 2. Configure Environment Variables
+In the Vercel Project Settings, add the following environment variable:
+- `GROQ_API_KEY`: Your actual Groq API key.
+
+### 3. Deploy
+Vercel will automatically detect the `vercel.json` and `main.py` configuration and deploy the FastAPI app as a serverless function.
+
+> [!NOTE]
+> Since this prototype uses local FAISS/BM25 indices, they are included in the repository (`data/processed/`). This allows the app to function immediately upon deployment without re-ingesting documents.
+
 ## 🚀 Usage
 
 ### Via Web UI
